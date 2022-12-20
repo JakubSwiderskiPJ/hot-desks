@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotDesks", "HotDesks\HotDesks.csproj", "{1421ADCE-DA20-4C13-8CB8-08170F1BC1CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1421ADCE-DA20-4C13-8CB8-08170F1BC1CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1421ADCE-DA20-4C13-8CB8-08170F1BC1CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1421ADCE-DA20-4C13-8CB8-08170F1BC1CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1421ADCE-DA20-4C13-8CB8-08170F1BC1CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
