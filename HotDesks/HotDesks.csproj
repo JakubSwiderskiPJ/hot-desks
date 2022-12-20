@@ -12,7 +12,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Context" />
       <Folder Include="Controllers" />
+      <Folder Include="Interfaces" />
+      <Folder Include="Migrations" />
+      <Folder Include="Pages" />
+      <Folder Include="Services" />
     </ItemGroup>
 
 </Project>
