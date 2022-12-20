@@ -10,76 +10,73 @@ namespace HotDesks.Controllers
     public class DesksController : ControllerBase
     {
         private readonly IHotDeskService _service;
-
-        public DesksController(IHotDeskService service)
+        private readonly ILogger _logger;
+        public DesksController(IHotDeskService service, ILogger<DesksController> logger)
         {
             _service = service;
+            _logger = logger;
         }
-
+        
         [HttpGet("/Desks")]
-        public async Task<ActionResult<IEnumerable<Desk>>> GetDesk()
+        public async Task<ActionResult<IEnumerable<Desk>>> GetDesks()
         {
-            if (_service.DeskDbIsNotNull().Equals(false))
-                return NotFound();
-            else
-                return await _service.GetDesks();
+            try
+            {
+                return Ok(await _service.GetDesks());
+            }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
 
         [HttpGet("/Desks/{id}")]
         public async Task<ActionResult<Desk>> GetDesk(int id)
         {
-
-            if (_service.DeskDbIsNotNull().Equals(false) || _service.DeskExists(id).Equals(false))
-                return NotFound();
-            else
-                return _service.GetDeskById(id);
+            try
+            {
+                return Ok(await _service.GetDeskById(id));
+            }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
 
         [HttpPut("/Desks/{id}")]
         public async Task<IActionResult> PutDesk(int id, Desk desk)
         {
-            if (_service.DeskExists(id).Equals(false))
-                return NotFound();
-            if (id != desk.Id)
-                return BadRequest();
-
-            _service.PutDesk(desk);
-            return NoContent();
+            try
+            {
+                return Ok(await _service.GetDesks());
+            }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
 
         }
 
         [HttpPost("/desks")]
         public async Task<ActionResult<Desk>> PostDesk(Desk desk)
         {
-            if (_service.DeskDbIsNotNull().Equals(false))
-                return Problem("Entity set 'DbContext.Desks'  is null.");
-            else
+            try
             {
-                _service.AddDesk(desk);
-                return CreatedAtAction("PostDesk", desk);
+                return Ok(await _service.GetDesks());
             }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
 
         [HttpDelete("/Desks/{id}")]
         public async Task<IActionResult> DeleteDesk(int id)
         {
-            if (_service.DeskDbIsNotNull().Equals(false) || _service.DeskExists(id).Equals(false))
-                return NotFound();
-            else
+            try
             {
-                _service.DeleteDesk(id);
-                return NoContent();
+                return Ok(await _service.GetDesks());
             }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
 
         [HttpGet("/desks/{id}/location")]
         public async Task<ActionResult<IEnumerable<Location>>> GetDeskLocation(int id)
         {
 
-            if (_service.DeskDbIsNotNull().Equals(false) || _service.DeskExists(id).Equals(false))
-                return NotFound();
-            else
-                return await _service.GetLocationFromDesk(id);
+            try
+            {
+                return Ok(await _service.GetDesks());
+            }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
     }
 }

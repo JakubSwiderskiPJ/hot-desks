@@ -1,12 +1,14 @@
-﻿namespace HotDesks.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HotDesks.Models;
 
 public class Employee
 {
-    public string Id { get; set; }
-    public string name { get; set; }
-    public ICollection<Reservation> Reservations { get; set; }
+    [Key]
+    public int Id { get; set; }
     
-    public int ReservationId {get; set; }
-    public Reservation Reservation { get; set; }
-    
+    [StringLength(50)]
+    public string? Name { get; set; }
+    public ICollection<Reservation>? Reservations { get; set; }
+
 }
