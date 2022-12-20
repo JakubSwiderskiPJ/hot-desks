@@ -6,4 +6,8 @@ public class Desk
     public int LocationId { get; set; }
     public Location Location { get; set; }
     public bool IsAvailable { get; set; }
+    
+    public int ReservationId {get; set; }
+    public Reservation Reservation { get; set; }
+
 }
