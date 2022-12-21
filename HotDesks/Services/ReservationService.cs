@@ -20,12 +20,12 @@ public class ReservationService : IReservationInterface
         throw new NotImplementedException();
     }
 
-    public Task BookADesk(Desk desk, DateOnly day)
+    public Task BookADesk(Desk desk, DateOnly day, Employee employee)
     {
         throw new NotImplementedException();
     }
 
-    public Task BookADeskLongRepiod(Desk desk, DateOnly dateFrom, DateOnly dateTo)
+    public Task BookADeskLongRepiod(Desk desk, DateOnly dateFrom, DateOnly dateTo, Employee employee)
     {
         throw new NotImplementedException();
     }
