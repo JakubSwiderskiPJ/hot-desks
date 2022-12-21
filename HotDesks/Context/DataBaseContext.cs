@@ -18,7 +18,7 @@ public class DataBaseContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlite("DataSource=dbo.HotDeskManagment.db");
+            optionsBuilder.UseSqlite("DataSource=dbo.CreateDatabase.db");
         }
     }
     

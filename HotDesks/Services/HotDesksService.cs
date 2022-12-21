@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
 using HotDesks.Context;
-using HotDesks.Interfaces;
+using HotDesks.Controllers;
 using HotDesks.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+
 
 
 namespace HotDesks.Services
@@ -17,21 +18,6 @@ namespace HotDesks.Services
         public HotDeskService(DataBaseContext dataBaseContext)
         {
             this.dbContext = dataBaseContext;
-        }
-        
-        public async Task AddDesk(Desk desk)
-        {
-            if (dbContext.Desks is null)
-                throw new NullReferenceException();
-            await dbContext.Desks.AddAsync(desk);
-            await dbContext.SaveChangesAsync();
-        }
-
-        public async Task AddLocation(Location location)
-        {
-            if (dbContext.Locations is null) throw new NullReferenceException();
-            await dbContext.Locations.AddAsync(location);
-            await dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteDesk(int id)
@@ -58,9 +44,11 @@ namespace HotDesks.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task PutDesk(Desk desk)
+        public async Task PutDesk(int id, Desk desk)
         {
-            Desk? entry = await dbContext.Desks.FirstOrDefaultAsync(X => X.Id == desk.Id);
+            if (dbContext.Desks is null)
+                throw new NullReferenceException();
+            Desk? entry = await dbContext.Desks.FirstOrDefaultAsync(X => X.Id == id);
 
             if (entry == null) throw new NullReferenceException();
 
@@ -68,14 +56,24 @@ namespace HotDesks.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public Task PostDesk(Desk desk)
+        public async Task PostDesk(Desk desk)
         {
-            throw new NotImplementedException();
+            if (dbContext.Desks is null)
+                throw new NullReferenceException();
+            await dbContext.Desks.AddAsync(desk);
+            await dbContext.SaveChangesAsync();
         }
 
-        public async Task PutLocation(Location location)
+        public async Task PostLocation(Location location)
         {
-            Location? enter = await dbContext.Locations.FirstOrDefaultAsync(X => X.Id == location.Id);
+            if (dbContext.Locations is null) throw new NullReferenceException();
+            await dbContext.Locations.AddAsync(location);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task PutLocation(int id, Location location)
+        {
+            Location? enter = await dbContext.Locations.FirstOrDefaultAsync(X => X.Id == id);
 
             if (enter == null) throw new NullReferenceException();
 
@@ -89,7 +87,7 @@ namespace HotDesks.Services
             return await dbContext.Desks.ToListAsync();
         }
 
-        public async Task<ActionResult<IEnumerable<Location>>> GetLocatoins()
+        public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
         {
             if (dbContext.Locations is null) throw new NullReferenceException();
             return await dbContext.Locations.ToListAsync();;
@@ -106,11 +104,6 @@ namespace HotDesks.Services
             if (dbContext.Locations is null) throw new NullReferenceException();
             return await dbContext.Locations.FirstOrDefaultAsync(X => X.Id == id);
         }
-
-        public async Task<ActionResult<IEnumerable<Location>>> GetLocationFromDesk(int authorId)
-        {
-            throw new NotImplementedException();
-        }
-        
     }
+    
 }

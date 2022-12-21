@@ -17,17 +17,18 @@ namespace HotDesks.Controllers
             _logger = logger;
         }
         
+        #region Desks
         [HttpGet("/Desks")]
         public async Task<ActionResult<IEnumerable<Desk>>> GetDesks()
         {
             try
-            {
+            {   
                 return Ok(await _service.GetDesks());
             }
             catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
 
-        [HttpGet("/Desks/{id}")]
+        [HttpGet("/Desk")]
         public async Task<ActionResult<Desk>> GetDesk(int id)
         {
             try
@@ -37,23 +38,25 @@ namespace HotDesks.Controllers
             catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
 
-        [HttpPut("/Desks/{id}")]
-        public async Task<IActionResult> PutDesk(int id, Desk desk)
+        [HttpPut("/Desks")]
+        public async Task<ActionResult> PutDesk(int id, Desk desk)
         {
             try
             {
-                return Ok(await _service.GetDesks());
+                await _service.PutDesk(id, desk);
+                return Ok();
             }
             catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
 
         }
 
-        [HttpPost("/desks")]
+        [HttpPost("/Desks")]
         public async Task<ActionResult<Desk>> PostDesk(Desk desk)
         {
             try
             {
-                return Ok(await _service.GetDesks());
+                await _service.PostDesk(desk);
+                return Ok();
             }
             catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
@@ -63,20 +66,72 @@ namespace HotDesks.Controllers
         {
             try
             {
-                return Ok(await _service.GetDesks());
+                await _service.DeleteDesk(id);
+                return Ok();
             }
-            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return Problem(ex.Message);
+            }
         }
 
-        [HttpGet("/desks/{id}/location")]
-        public async Task<ActionResult<IEnumerable<Location>>> GetDeskLocation(int id)
+        #endregion
+        
+        #region Locations
+        [HttpGet("/Get/Locations")]
+        public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
         {
-
             try
             {
-                return Ok(await _service.GetDesks());
+                return Ok(await _service.GetLocations());
             }
             catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
         }
+
+        [HttpGet("/Get/locations/{id}")]
+        public async Task<ActionResult<Location>> GetLocation(int id)
+        {
+            try
+            {
+                return Ok(await _service.GetLocationById(id));
+            }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
+        }
+
+        [HttpPut("Put/Locations/{id}")]
+        public async Task<IActionResult> PutLocation(int id, Location location)
+        {
+            try
+            {
+                await _service.PutLocation(id, location);
+                return Ok();
+            }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
+
+        }
+
+        [HttpPost("/Post/locations")]
+        public async Task<ActionResult<Location>> PostLocation(Location location)
+        {
+            try
+            {
+                await _service.PostLocation(location);
+                return Ok();
+            }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
+        }
+
+        [HttpDelete("/Delete/locations/{id}")]
+        public async Task<IActionResult> DeleteLocation(int id)
+        {
+            try
+            {
+                await _service.DeleteLocation(id);
+                return Ok();
+            }
+            catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
+        }
+        #endregion
     }
 }

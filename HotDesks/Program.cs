@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using HotDesks.Context;
 using HotDesks.Interfaces;
 using HotDesks.Services;
+using HotEmployees.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Logging.AddConsole();
 // Add services to the container.
 
 builder.Services.AddScoped<IHotDeskService, HotDeskService>();
+builder.Services.AddScoped<IEmployeeInterface, EmployeeService>();
+builder.Services.AddScoped<IReservationInterface, ReservationService>();
 builder.Services.AddControllers();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<DataBaseContext>();
