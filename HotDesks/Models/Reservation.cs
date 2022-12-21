@@ -10,7 +10,7 @@ public class Reservation
     public Desk? Desk { get; set; }
     public int EmployeeId { get; set; }
     public Employee? Employee { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
+    public DateOnly StartDate { get; set; }
+    public DateOnly EndDate { get; set; }
 
 }

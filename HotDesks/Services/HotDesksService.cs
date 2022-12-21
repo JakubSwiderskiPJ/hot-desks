@@ -5,9 +5,6 @@ using HotDesks.Context;
 using HotDesks.Controllers;
 using HotDesks.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-
-
 
 namespace HotDesks.Services
 {

@@ -52,7 +52,7 @@ public class ReservationController : Controller
     {
         try
         {
-            await _service.BookADesk(desk, when, employee);
+            await _service.BookADesk(desk, when, when, employee);
             return Ok();
         }
         catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
@@ -63,18 +63,18 @@ public class ReservationController : Controller
     {
         try
         {
-            await _service.BookADeskLongRepiod(desk, dateFrom, dateTo, employee);
+            await _service.BookADesk(desk, dateFrom, dateTo, employee);
             return Ok();
         }
         catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
     }
     
     [HttpGet("/ChangeDesk")]
-    public async Task<ActionResult<IEnumerable<Location>>> ChangeDesk(Desk previousDesk, Desk newDesk)
+    public async Task<ActionResult<IEnumerable<Location>>> ChangeDesk(Desk previousDesk, Desk newDesk, Employee employee)
     {
         try
         {
-            await _service.ChangeDesk(previousDesk, newDesk);
+            await _service.ChangeDesk(previousDesk, newDesk, employee);
             return Ok();
         }
         catch (Exception ex) { _logger.LogError(ex.Message); return Problem(ex.Message); }
